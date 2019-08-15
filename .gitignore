@@ -1,3 +1,6 @@
+# Audio files
+*.wav
+
 # Built ts files
 dist/**/*
 

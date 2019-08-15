@@ -8,6 +8,7 @@
 'use strict';
 
 const mFs = require('fs');
+const mPath = require('path');
 const mSpawn = require('child_process').spawn;
 
 export class WavPlayer {
