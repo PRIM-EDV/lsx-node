@@ -98,7 +98,7 @@ export class WavPlayer {
             } else {
                 reject(new Error('The wav file can not be played on this platform.'));
             }
-    
+
             let timer = null;
             if (!sync) {
                 timer = setTimeout(() => {
@@ -116,7 +116,9 @@ export class WavPlayer {
                 if (this._called_stop === true) {
                     resolve();
                 } else {
+                    console.log(code)
                     if (code === 0) {
+                        
                         if (sync) {
                             resolve();
                         } else if (loop) {

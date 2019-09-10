@@ -7,17 +7,22 @@ export class WavChannel {
 
     private _player: WavPlayer = new WavPlayer();
     private _readyState: BehaviorSubject<number> = new BehaviorSubject<number>(WavChannel.READY);
+    private _priority: number = -1;
     
-    public async play(path: string): Promise<void> {
-        if (this.readyState == WavChannel.READY) {
+    public async play(path: string, priority=0): Promise<void> {
+        if (this.readyState == WavChannel.READY && priority > this._priority) {
             this.readyState = WavChannel.RUNNING;
-        
+            this._priority = priority;
+
             try {
-                await this._player.play({path: path})
+                await this._player.play({path: path, sync: true})
+
+                console.log('I"m done')
             } catch(err) {
-                throw err;
+                // throw err;
             }
 
+            this._priority = -1;
             this.readyState = WavChannel.READY;
         } else {
             throw new Error('Channel still in use');
